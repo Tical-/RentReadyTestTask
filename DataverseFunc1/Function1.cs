@@ -59,12 +59,12 @@ namespace DataverseFunc1
 
             using (var svc = new Microsoft.PowerPlatform.Dataverse.Client.ServiceClient(conn))
             {
-                //var condition1 = new ConditionExpression();
-                //condition1.AttributeName = "msdyn_start";
-                //condition1.Operator = ConditionOperator.GreaterEqual;
-                //condition1.Values.Add(Start);
-                //var filter1 = new FilterExpression();
-                //filter1.Conditions.Add(condition1);
+                var condition1 = new ConditionExpression();
+                condition1.AttributeName = "msdyn_start";
+                condition1.Operator = ConditionOperator.GreaterEqual;
+                condition1.Values.Add(Start);
+                var filter1 = new FilterExpression();
+                filter1.Conditions.Add(condition1);
 
                 var condition2 = new ConditionExpression();
                 condition2.AttributeName = "msdyn_start";
@@ -75,7 +75,7 @@ namespace DataverseFunc1
 
                 var query = new QueryExpression("msdyn_timeentry");
                 query.ColumnSet.AddColumns("msdyn_start", "msdyn_end");
-                //query.Criteria.AddFilter(filter1);
+                query.Criteria.AddFilter(filter1);
                 query.Criteria.AddFilter(filter2);
 
                 var result = await svc.RetrieveMultipleAsync(query);
