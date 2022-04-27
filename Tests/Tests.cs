@@ -15,6 +15,9 @@ namespace Tests
     public partial class Tests
     {
         private readonly ILogger logger = NullLoggerFactory.Instance.CreateLogger("Test");
+        /// <summary>
+        /// 
+        /// </summary>
         [Fact]
         public async void MSDYNAddRangeTest()
         {
@@ -32,8 +35,8 @@ namespace Tests
             list.Add(ent);
             var coll = new EntityCollection(list); 
             var exp = MSDYNAddRange.GetQuery(Start, End);
-            mock.Setup(z => z.RetrieveMultipleAsync(MSDYNAddRange.GetQuery(Start, End))).ReturnsAsync(coll);
-            //mock.Setup(z => z.CreateAsync(exp)).ReturnsAsync(coll);
+            mock.Setup(z => z.RetrieveMultipleAsync(exp)).ReturnsAsync(coll);
+            mock.Setup(z => z.CreateAsync(It.IsAny<Entity>())).ReturnsAsync(Guid.NewGuid);
             MSDYNAddRange.svc = mock.Object;
             MSDYNAddRange.exp = exp;
             await MSDYNAddRange.Run(request, logger);
