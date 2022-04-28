@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace DataverseFunc1
+namespace DataverseFunc
 {
     public class StartOn
     {

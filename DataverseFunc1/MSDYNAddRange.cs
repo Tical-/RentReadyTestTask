@@ -13,7 +13,7 @@ using System.Linq;
 using Microsoft.Xrm.Sdk.Query;
 using Exception = System.Exception;
 
-namespace DataverseFunc1
+namespace DataverseFunc
 {
     public static partial class MSDYNAddRange
     {
@@ -30,7 +30,7 @@ namespace DataverseFunc1
             DateTime.TryParseExact(data.properties.EndOn.value, "dd.MM.yyyy", null, System.Globalization.DateTimeStyles.None, out var End);
             if (Start >= End)
             {
-                throw new Exception("Dates is wrong");
+                return new OkObjectResult("Dates is wrong");
             }
             var result = await svc.RetrieveMultipleAsync(exp?? GetQuery(Start, End));
             var mas = result.Entities.Select(z => DateTime.Parse(z.Attributes["msdyn_start"].ToString()).ToShortDateString()).ToList();
@@ -38,9 +38,11 @@ namespace DataverseFunc1
             {
                 if (!mas.Contains(Start.ToShortDateString()))
                 {
-                    var account = new Entity("msdyn_timeentry");
-                    account["msdyn_start"] = Start.ToString("MM.dd.yyyy");
-                    account["msdyn_end"] = Start.ToString("MM.dd.yyyy");
+                    var account = new Entity("msdyn_timeentry")
+                    {
+                        ["msdyn_start"] = Start.ToString("MM.dd.yyyy"),
+                        ["msdyn_end"] = Start.ToString("MM.dd.yyyy")
+                    };
                     output.Add(await svc.CreateAsync(account));
                 }
                 Start = Start.AddDays(1);
@@ -49,7 +51,3 @@ namespace DataverseFunc1
         }
     }
 }
-
-//Сейчас мы добавляем рандомные даты, но мы хотим наверное проверить даты которые нужны в Entity CreateAsync
-//Но хотя непонятно, думаю нужно вручную указывать даты входящих параметров для проверки алгоритма
-//Без указания Алгоритма, просто указать 2 Entity какие должны быть вместо It.IsAny<Entity>()

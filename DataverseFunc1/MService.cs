@@ -10,7 +10,7 @@ using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace DataverseFunc1
+namespace DataverseFunc
 {
     public interface MService : IOrganizationService,
         IOrganizationServiceAsync2,

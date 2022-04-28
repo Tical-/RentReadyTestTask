@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.Xrm.Sdk.Query;
 
-namespace DataverseFunc1
+namespace DataverseFunc
 {
     public static partial class MSDYNAddRange
     {
