@@ -1,4 +1,4 @@
-# RentReadyTestTask
+# Test task for RentReady
 https://make.powerapps.com/environments/fe0d35d9-1949-e252-8ee8-503296d78756/entities/fe0d35d9-1949-e252-8ee8-503296d78756/msdyn_timeentry#data
 
 SanzharSeidakhmetov@RentReady592.onmicrosoft.com
@@ -33,3 +33,4 @@ You can feed with such requests:
 
 https://github.com/Tical-/RentReadyTestTask
 https://github.com/Tical-/RentReadyTestTask.git
+
